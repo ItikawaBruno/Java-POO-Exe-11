@@ -12,11 +12,11 @@ public class Reserva {
     private double valorOriginal;
     private double valorFinal;
 
-    public Reserva(Cliente cliente, Assento assento, double valorOriginal) {
+    public Reserva(Cliente cliente, Assento assento, double valorOriginal, double valorFinal) {
         this.cliente = cliente;
         this.assento = assento;
         this.valorOriginal = valorOriginal;
-        this.valorFinal = desconto.aplicarDesconto(valorOriginal);
+        this.valorFinal = valorFinal;
     }
 
     public Cliente getCliente() {
@@ -49,6 +49,14 @@ public class Reserva {
 
     public void setValorFinal(double valorFinal) {
         this.valorFinal = valorFinal;
+    }
+
+    public IDesconto getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(IDesconto desconto) {
+        this.desconto = desconto;
     }
 
     @Override

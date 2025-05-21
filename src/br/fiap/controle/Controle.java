@@ -49,6 +49,7 @@ public class Controle {
             if (cpf.equalsIgnoreCase(r.getCliente().getNome()) && contato.equalsIgnoreCase(r.getCliente().getContato())) {
                 listaReservas.remove(r);
                 JOptionPane.showMessageDialog(null,"Reserva cancelada!");
+                break;
             }else{
                 JOptionPane.showMessageDialog(null,"Não foi possivel cancelar a reserva.");
             }
@@ -76,7 +77,7 @@ public class Controle {
                 1. Pessoa Fisica.
                 2. Pessoa Juridica.
                 """));
-        while (opcao != 1 || opcao != 2){
+        while (opcao != 1 && opcao != 2){
             JOptionPane.showMessageDialog(null,"Opção invalida!");
             opcao = Integer.parseInt((JOptionPane.showInputDialog("""
                 1. Pessoa Fisica.
@@ -92,7 +93,8 @@ public class Controle {
             int numero = Integer.parseInt(JOptionPane.showInputDialog("Informe o número do assento"));
             assento = new Assento(numero);
             double valor = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor do assento"));
-            reserva = new Reserva(pessoaFisica,assento,valor);
+            double valorFinal = pessoaFisica.aplicarDesconto(valor);
+            reserva = new Reserva(pessoaFisica,assento,valor, valorFinal);
             listaReservas.add(reserva);
 
         }else if(opcao == 2) {
@@ -103,7 +105,8 @@ public class Controle {
             int numero = Integer.parseInt(JOptionPane.showInputDialog("Informe o número do assento"));
             assento = new Assento(numero);
             double valor = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor do assento"));
-            reserva = new Reserva(pessoaJuridica,assento,valor);
+            double valorFinal = pessoaJuridica.aplicarDesconto(valor);
+            reserva = new Reserva(pessoaJuridica,assento,valor, valorFinal);
             listaReservas.add(reserva);
         }
 
