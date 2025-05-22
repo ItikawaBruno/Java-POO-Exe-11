@@ -12,11 +12,19 @@ public class Reserva {
     private double valorOriginal;
     private double valorFinal;
 
-    public Reserva(Cliente cliente, Assento assento, double valorOriginal, double valorFinal) {
+    public Reserva(Cliente cliente, Assento assento, double valorOriginal) {
         this.cliente = cliente;
         this.assento = assento;
         this.valorOriginal = valorOriginal;
-        this.valorFinal = valorFinal;
+        calcularDesconto();
+    }
+
+    private void calcularDesconto() {
+        if(cliente instanceof IDesconto){
+            valorFinal = ((IDesconto) cliente).aplicarDesconto(valorOriginal);
+        }else{
+            valorFinal = valorOriginal;
+        }
     }
 
     public Cliente getCliente() {

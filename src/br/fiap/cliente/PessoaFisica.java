@@ -4,7 +4,7 @@ import br.fiap.desconto.IDesconto;
 
 import java.util.Random;
 
-public class PessoaFisica extends Cliente implements IDesconto {
+public class PessoaFisica extends Cliente {
 
     private String cpf;
 
@@ -28,11 +28,5 @@ public class PessoaFisica extends Cliente implements IDesconto {
         return super.toString() +", cpf = "+this.cpf;
     }
 
-    @Override
-    public double aplicarDesconto(double valorOriginal) {
-        Random random = new Random();
-        double desconto = 0;
-        desconto = valorOriginal - (random.nextDouble(0.01,0.99) * valorOriginal);
-        return desconto;
-    }
+
 }

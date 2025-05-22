@@ -90,24 +90,57 @@ public class Controle {
             String contato = JOptionPane.showInputDialog("Informe o número de contato");
             String cpf = JOptionPane.showInputDialog("Informe o cpf");
             pessoaFisica = new PessoaFisica(nome,contato,cpf);
-            int numero = Integer.parseInt(JOptionPane.showInputDialog("Informe o número do assento"));
+            int numero= 0;
+            boolean assentoDisponivel = false;
+            while (!assentoDisponivel) {
+                numero = Integer.parseInt(JOptionPane.showInputDialog("Informe o número do assento"));
+                assentoDisponivel = true;
+                for (Reserva r : listaReservas) {
+                    if (numero == r.getAssento().getNumero()) {
+                        assentoDisponivel = false;
+                        JOptionPane.showMessageDialog(null, "Esse assento já está reservado!");
+                        break;
+                    }
+                }
+                if (assentoDisponivel) {
+                    JOptionPane.showMessageDialog(null, "Número do assento aceito!");
+                }
+            }
             assento = new Assento(numero);
             double valor = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor do assento"));
-            double valorFinal = pessoaFisica.aplicarDesconto(valor);
-            reserva = new Reserva(pessoaFisica,assento,valor, valorFinal);
+            reserva = new Reserva(pessoaFisica,assento,valor);
             listaReservas.add(reserva);
+            JOptionPane.showMessageDialog(null,"Reserva feita com sucesso!");
 
         }else if(opcao == 2) {
             String nome = JOptionPane.showInputDialog("Informe o nome");
             String contato = JOptionPane.showInputDialog("Informe o número de contato");
             String cnpj = JOptionPane.showInputDialog("Informe o cpf");
             pessoaJuridica = new PessoaJuridica(nome,contato,cnpj);
-            int numero = Integer.parseInt(JOptionPane.showInputDialog("Informe o número do assento"));
+            int numero = 0;
+            boolean assentoDisponivel = false;
+            while (!assentoDisponivel) {
+                numero = Integer.parseInt(JOptionPane.showInputDialog("Informe o número do assento"));
+                assentoDisponivel = true;
+
+                for (Reserva r : listaReservas) {
+                    if (numero == r.getAssento().getNumero()) {
+                        assentoDisponivel = false;
+                        JOptionPane.showMessageDialog(null, "Esse assento já está reservado!");
+                        break;
+                    }
+                }
+
+                if (assentoDisponivel) {
+                    JOptionPane.showMessageDialog(null, "Número do assento aceito!");
+                }
+            }
             assento = new Assento(numero);
             double valor = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor do assento"));
             double valorFinal = pessoaJuridica.aplicarDesconto(valor);
-            reserva = new Reserva(pessoaJuridica,assento,valor, valorFinal);
+            reserva = new Reserva(pessoaJuridica,assento,valor);
             listaReservas.add(reserva);
+            JOptionPane.showMessageDialog(null,"Reserva feita com sucesso!");
         }
 
     }
