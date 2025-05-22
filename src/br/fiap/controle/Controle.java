@@ -57,10 +57,11 @@ public class Controle {
     }
 
     private void pesquisarReserva() {
-        int numero = Integer.parseInt(JOptionPane.showInputDialog("Digite o numero do assento"));
+        String identificador = JOptionPane.showInputDialog("Digite o identificador do cliente");
         for(Reserva r : listaReservas){
-            if(numero == r.getAssento().getNumero()){
+            if(r.getCliente().gerIdentificador().equals(identificador)){
                 JOptionPane.showMessageDialog(null,r);
+                return;
             }else{
                 JOptionPane.showMessageDialog(null,"Essa reserva não foi encontrada.");
             }
